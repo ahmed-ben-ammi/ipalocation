@@ -1,64 +1,106 @@
 const users = [
     {
-        id:"1",
-        nom:"ahmed",
-        prenom:"ben ammi",
-        telephon:"0650647291"
+        id: 1,
+        nom: 'abde rrahmane',
+        prenom: 'abdo',
+        email: 'esompel@gamil.com',
+        tel: '6000000000'
     },
     {
-        id:"2",
-        nom:"amin",
-        prenom:"ben ammi",
-        telephon:"0639109529"
+        id: 2,
+        nom: ' mohamed',
+        prenom: 'jalil',
+        email: 'esompel@gamil.com',
+        tel: '6000000000'
     },
     {
-        id:"3",
-        nom:"anwar",
-        prenom:"ben ammi",
-        telephon:"0687579874"
+        id: 3,
+        nom: 'samir',
+        prenom: 'karom',
+        email: 'esompel@gamil.com',
+        tel: '6000000000'
     },
     {
-        id:"4",
-        nom:"ahmed",
-        prenom:"ben ammi",
-        telephon:"0667633362"
-    },
-]
-const cars = [
-    {
-        id:"1",
-        Number:"1258A24",
-        mark:"TESLA",
-        Serrer:"RFGT",
-        images:"TJRIBA.jpg",
+        id: 4,
+        nom: 'ossama',
+        prenom: 'khlid',
+        email: 'esompel@gamil.com',
+        tel: '6000000000'
     },
     {
-        id:"2",
-        Number:"1258b24",
-        mark:"TESLA",
-        Serrer:"RFGT",
-        images:"TJRIBA.jpg",
+        id: 5,
+        nom: 'ayoub',
+        prenom: 'walo',
+        email: 'esompel@gamil.com',
+        tel: '6000000000'
     },
     {
-        id:"3",
-        Number:"1258c24",
-        mark:"TESLA",
-        Serrer:"RFGT",
-        images:"TJRIBA.jpg",
+        id: 6,
+        nom: 'rachid',
+        prenom: 'alow',
+        email: 'esompel@gamil.com',
+        tel: '6000000000'
     },
     {
-        id:"4",
-        Number:"1258d24",
-        mark:"TESLA",
-        Serrer:"RFGT",
-        images:"TJRIBA.jpg",
+        id: 7,
+        nom: 'kamal',
+        prenom: 'abdo',
+        email: 'esompel@gamil.com',
+        tel: '6000000000'
+    },
+];
+
+
+const cars =[
+    {
+        id: 1,
+        num: 'a 222 b',
+        marque: 'bmw',
+        serie: 'm6',
+        image: '...'
     },
     {
-        id:"4",
-        Number:"1258e24",
-        mark:"TESLA",
-        Serrer:"RFGT",
-        images:"TJRIBA.jpg",
+        id: 2,
+        num: 'a 224722 b',
+        marque: 'Mercedes',
+        serie: '5',
+        image: '...'
     },
-]
-module.exports = { users,cars}
+    {
+        id: 3,
+        num: 'a 222 b',
+        marque: 'tesla',
+        serie: 'skd2',
+        image: '...'
+    },
+    {
+        id: 4,
+        num: 'a 222 b',
+        marque: 'porche',
+        serie: 'duj',
+        image: '...'
+    },
+    {
+        id: 5,
+        num: 's 222 b',
+        marque: 'audi',
+        serie: 'jkds',
+        image: '...'
+    },
+    {
+        id: 6,
+        num: 'a 222 b',
+        marque: 'toyouta',
+        serie: 'hjgez',
+        image: '...'
+    },
+    {
+        id: 1,
+        num: 'a 222 b',
+        marque: 'lercat',
+        serie: 'hdsgf',
+        image: '...'
+    },
+];
+
+module.exports = {users, cars}

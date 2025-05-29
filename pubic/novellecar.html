@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet de voiture</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">voitures</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Accueil</a>
+                    </li>
+                    
+                    
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          type de   voitures
+                        </button>
+                        <ul class="dropdown-menu bg-primary">
+                            <li><a class="dropdown-item te" href="/car1?id=1">type1</a></li>
+                            <li><a class="dropdown-item text-" href="/car1?id=2">type 2</a></li>
+                            <li><a class="dropdown-item text-" href="/car1?id=3">type 3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button class="btn btn-primary " type="button" >
+                            <a href="/novellecar" class="text-light">novelle voiture</a>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+               
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="text-center container mt-4">
+        <h1 class="text-primary">Liste des voitures</h1>
+    </main>
+    <div id="cars" class="container d-flex flex-wrap justify-content-center">
+
+    </div>
+    <style>
+
+        .dropdown-item{
+            color: white;
+        }
+        .dropdown-item:hover{
+        
+            color:black;
+        }
+        a{
+            text-decoration: none;
+        }
+    
+    </style>
+        <div class="container mt-5">
+        
+        <form id="form">
+            <div class="mb-3">
+                <label for="marquecar" class="form-label">marque de voiture</label>
+                <input type="text" class="form-control" id="marquecar" placeholder="Entrez la marque">
+            </div>
+            <div class="mb-3">
+                <label for="serie" class="form-label">serie</label>
+                <input type="number" class="form-control" id="serie" placeholder="Entrez le volume horaire">
+            </div>
+            <!-- <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" rows="3" placeholder="Entrez la description"></textarea>
+            </div> -->
+            <div class="mb-3">
+                <label for="num" class="form-label">numero de la voiture</label>
+                <input type="text" class="form-control" id="formateur" placeholder="Entrez le nom du formateur">
+            </div>
+            <div class="mb-3">
+    <label for="imageFormation" class="form-label">Image de la voiture</label>
+    <input type="file" class="form-control" id="imageFormation" accept="image/*">
+</div>
+
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
+</body>
+</html>
