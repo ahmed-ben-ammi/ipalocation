@@ -77,7 +77,7 @@
         <div class="container mt-5">
         
         <form id="form">
-            <div class="mb-3">
+            <div class="form-group mb-3">
                 <label for="marquecar" class="form-label">marque de voiture</label>
                 <input type="text" class="form-control" id="marquecar" placeholder="Entrez la marque">
             </div>
@@ -91,11 +91,11 @@
             </div> -->
             <div class="mb-3">
                 <label for="num" class="form-label">numero de la voiture</label>
-                <input type="text" class="form-control" id="formateur" placeholder="Entrez le nom du formateur">
+                <input type="text" class="form-control" id="num" placeholder="Entrez le nom du formateur">
             </div>
             <div class="mb-3">
-    <label for="imageFormation" class="form-label">Image de la voiture</label>
-    <input type="file" class="form-control" id="imageFormation" accept="image/*">
+    <label for="imagecar" class="form-label">Image de la voiture</label>
+    <input type="file" class="form-control" id="imagecar" accept="image/*">
 </div>
 
             <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -103,3 +103,27 @@
     </div>
 </body>
 </html>
+<script>
+    const form = document.getElementById("from")
+    document.addEventListener("submit",(e)=>{
+        e.preventDefault()
+    const nouvellevoitur ={
+        marque: document.getElementById("marquecar").value,
+        num :document.getElementById("num").value,
+        serie:document.getElementById('serie').value,
+         Image: document.getElementById("imagecar").value,
+    }
+    fetch("http://localhost:3000/novelleformation",
+        {
+            method:"POST",
+            headers :{"content-Type":"application/json"},
+            body:JSON.stringify(nouvellevoitur)
+        }
+    ).then(res=>res.json()
+.thrn(car=>()=>{
+    
+}))
+    })
+
+
+</script>
