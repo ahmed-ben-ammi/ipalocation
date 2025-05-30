@@ -83,7 +83,7 @@
             </div>
             <div class="mb-3">
                 <label for="serie" class="form-label">serie</label>
-                <input type="number" class="form-control" id="serie" placeholder="Entrez le volume horaire">
+                <input type="number" class="form-control" id="serie" placeholder="serie">
             </div>
             <!-- <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
@@ -91,7 +91,7 @@
             </div> -->
             <div class="mb-3">
                 <label for="num" class="form-label">numero de la voiture</label>
-                <input type="text" class="form-control" id="num" placeholder="Entrez le nom du formateur">
+                <input type="text" class="form-control" id="num" placeholder="nemero se la voiture">
             </div>
             <div class="mb-3">
     <label for="imagecar" class="form-label">Image de la voiture</label>
@@ -119,10 +119,16 @@
             headers :{"content-Type":"application/json"},
             body:JSON.stringify(nouvellevoitur)
         }
-    ).then(res=>res.json()
-.thrn(car=>()=>{
+    ).then(res=>res.json())
+.then(car=>{
+    console.log("formation ajoutez",car);
     
-}))
+    
+})
+.catch(err=>{
+    console.error("error",err);
+    
+})
     })
 
 

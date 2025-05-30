@@ -1,66 +1,76 @@
 const express = require('express');
-const {users, cars} = require('./data/data.js')
+const { users, cars } = require('./data/data.js');
 const app = express();
-const PORT = 8888
+const PORT = 8888;
+const path = require('path');
+const multer = require('multer');
 
+app.use(express.static(path.join(__dirname, 'pubic')));
 app.use(express.json());
 
+// config Multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/emage/');
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+const upload = multer({ 
+    storage: storage ,
+    limits: { fileSize: 2 * 1024 * 1024 } // Limite: 2MB
+ })
 
 
-// Définir une route GET page home
+
+
+
+
+
+
+
+// Page d'accueil
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.sendFile(path.join(__dirname, 'pubic', 'index.html'));
 });
-// Définir une route GET page users
-app.get('/users', (req, res) => {
-  res.json(users);
+
+// Page pour afficher une voiture
+app.get('/car1', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pubic', 'car1.html'));
 });
-// hna kanjib user b id 
+
+// Page pour ajouter une nouvelle voiture
+app.get('/novellecar', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pubic', 'novellecar.html'));
+});
+
+// CRUD USERS
+app.get('/users', (req, res) => res.json(users));
+
 app.get('/users/:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    const user = users.find(u => u.id == id)
-    if(user){
-        res.status(200).json(user)
-    }else{
-        res.status(404).json({message: "hellao world"})
-    }
-})
-// hna kahsni nposti users jdad
+  const id = parseInt(req.params.id);
+  const user = users.find(u => u.id === id);
+  if (user) res.json(user);
+  else res.status(404).json({ message: "User non trouvé." });
+});
+
 app.post('/users', (req, res) => {
   const { nom, prenom, email, tel } = req.body;
+  if (!nom || !prenom || !email || !tel)
+    return res.status(400).json({ error: "Tous les champs sont obligatoires." });
 
-  // Vérification que tous les champs sont présents
-  if (!nom || !prenom || !email || !tel) {
-    return res.status(400).json({ error: 'Tous les champs sont obligatoires.' });
-  }
-
-  // Création de la formation
-  const user = {
-    id: users.length+1   ,
-    nom,
-    prenom,
-    email,
-    tel
-  };
-
-  // Ajout dans le tableau
+  const user = { id: users.length + 1, nom, prenom, email, tel };
   users.push(user);
-
-  // Réponse avec la formation créée
   res.status(201).json(user);
 });
 
-// hna ghn9der nbdel lm3lomat 
 app.put('/users/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const user = users.find(f => f.id === id);
+  const user = users.find(u => u.id === id);
+  if (!user) return res.status(404).json({ error: "User non trouvé." });
 
-  // Vérification de l'existence
-  if (!user) {
-    return res.status(404).json({ error: 'Formation non trouvée.' });
-  }
-
-  // Mise à jour des champs si fournis
   const { nom, prenom, email, tel } = req.body;
   if (nom) user.nom = nom;
   if (prenom) user.prenom = prenom;
@@ -70,72 +80,106 @@ app.put('/users/:id', (req, res) => {
   res.json(user);
 });
 
-// hna n9der nmse7 aya user
 app.delete('/users/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const index = users.findIndex(f => f.id === id);
+  const index = users.findIndex(u => u.id === id);
+  if (index === -1) return res.status(404).json({ error: "User non trouvé." });
 
-  // Vérification de l'existence
-  if (index === -1) {
-    return res.status(404).json({ error: 'Formation non trouvée.' });
-  }
-
-  // Suppression avec splice
   const [deleted] = users.splice(index, 1);
-  res.json({ message: 'Formation supprimée.', formation: deleted });
+  res.json({ message: "User supprimé.", user: deleted });
 });
 
-
-// Définir une route GET page cars 
-app.get('/cars', (req, res) => {
-  res.json(cars);
-});
+// CRUD CARS
+app.get('/cars', (req, res) => res.json(cars));
 
 app.get('/cars/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const car = cars.find(f => f.id === id);
-  if (car) {
-    res.json(car);
-  } else {
-    res.status(404).json({ message: "car non trouvée" });
-  }
-}); 
-// han n9der nposte cars b post
-app.post('/cars', (req, res) => {
-  const { num, marque, serie, image } = req.body;
-
-  // Vérification que tous les champs sont présents
-  if (!num || !marque || !serie || !image) {
-    return res.status(400).json({ error: 'Tous les champs sont obligatoires.' });
-  }
-
-  // Création de la formation
-  const car = {
-    id: users.length+1   ,
-    num,
-    marque,
-    serie,
-    image
-  };
-
-  // Ajout dans le tableau
-  cars.push(car);
-
-  // Réponse avec la formation créée
-  res.status(201).json(car);
+  const car = cars.find(c => c.id === id);
+  if (car) res.json(car);
+  else res.status(404).json({ message: "Voiture non trouvée." });
 });
 
-// hna ghn9der nbdel lm3lomat 
+// app.post('/cars', (req, res) => {
+//   const { num, marque, serie, image } = req.body;
+//   if (!num || !marque || !serie || !image)
+//     return res.status(400).json({ error: "Tous les champs sont obligatoires." });
+
+//   const car = { id: cars.length + 1, num, marque, serie, image };
+//   cars.push(car);
+//   res.status(201).json(car);
+// });
+
+
+
+
+
+
+app.post('cars', upload.single('img'), (req, res) => {
+  if (!num || !marque || !serie || !image) {
+    return res.status(400).json({ error: "tous les chomps sont obligatoires."});
+}
+
+  const car = {
+      id: cars.length + 1,
+      // slug: req.body.title.toLowerCase().replace(/\s+/g, '-'),
+num,
+ marque,
+  serie,  
+  image: req.file.filename ,
+
+};
+
+  cars.push(car);
+  res.status(201).json(newFormation);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.put('/cars/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const car = cars.find(f => f.id === id);
+  const car = cars.find(c => c.id === id);
+  if (!car) return res.status(404).json({ error: "Voiture non trouvée." });
 
-  // Vérification de l'existence
-  if (!car) {
-    return res.status(404).json({ error: 'Formation non trouvée.' });
-  }
-
-  // Mise à jour des champs si fournis
   const { num, marque, serie, image } = req.body;
   if (num) car.num = num;
   if (marque) car.marque = marque;
@@ -144,28 +188,17 @@ app.put('/cars/:id', (req, res) => {
 
   res.json(car);
 });
-// Définir une route GET page cars 
-app.get('/cars', (req, res) => {
-  res.json(cars);
-});
 
-// hana n9der nmse7 lcar li bghit 
 app.delete('/cars/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const index = cars.findIndex(f => f.id === id);
+  const index = cars.findIndex(c => c.id === id);
+  if (index === -1) return res.status(404).json({ error: "Voiture non trouvée." });
 
-  // Vérification de l'existence
-  if (index === -1) {
-    return res.status(404).json({ error: 'Formation non trouvée.' });
-  }
-
-  // Suppression avec splice
   const [deleted] = cars.splice(index, 1);
-  res.json({ message: 'voiture supprimée.', formation: deleted });
+  res.json({ message: "Voiture supprimée.", car: deleted });
 });
 
-
-// Démarrer le serveur
+// Démarrage du serveur
 app.listen(PORT, () => {
-  console.log('Serveur démarré sur http://localhost:8888');
+  console.log(`Serveur démarré sur http://localhost:${PORT}`);
 });

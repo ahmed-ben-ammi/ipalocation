@@ -92,7 +92,7 @@
     <script>
         // pour affich tous les cars
         function fetchcars(){
-            fetch("http://localhost:8888")
+            fetch("http://localhost:8888/cars")
             .then(res=>res.json())
             .then(cars => {
                 const container =document.getElementById("cars")
@@ -125,7 +125,40 @@
             })
         }
         fetchcars();
-      
+
+
+
+
+//          document.addEventListener("DOMContentLoaded", async () => {
+//     const container = document.getElementById("cars");
+
+//     try {
+//         const response = await fetch("http://localhost:3000/novellecar");
+//         if (!response.ok) throw new Error("Erreur de récupération des cars");
+
+//         const cars = await response.json();
+
+//         cars.forEach(car => {
+//             const card = document.createElement("div");
+//             card.className = "card m-3";
+//             card.innerHTML = `
+//                 <img src="${car.image}" class="card-img-top" alt="${car.marque}">
+//                 <div class="card-body">
+//                     <h5 class="card-title">${car.marque}</h5>
+//                     <p class="card-text">nemero de voitur : ${car.num}</p>
+//                     <p class="card-text">serie de voitur : ${car.serie}</p>
+                  
+//                 </div>
+//             `;
+//             container.appendChild(card);
+//         });
+//     } catch (error) {
+//         console.error("Erreur:", error);
+//         container.innerHTML = `<p class="text-danger">Impossible de charger les vpiture</p>`;
+//     }
+// });
+
+
         
 
     </script>
