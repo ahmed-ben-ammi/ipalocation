@@ -1,166 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet de voiture</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil - voitures</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">voitures</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">voitures</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="/">Accueil</a></li>
+          <li class="nav-item dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              type de voitures
             </button>
-    
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/">Accueil</a>
-                    </li>
-                    
-                    
-                    <li class="nav-item dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          type de   voitures
-                        </button>
-                        <ul class="dropdown-menu bg-primary">
-                            <li><a class="dropdown-item te" href="/car1?id=1">type1</a></li>
-                            <li><a class="dropdown-item text-" href="/car1?id=2">type 2</a></li>
-                            <li><a class="dropdown-item text-" href="/car1?id=3">type 3</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button class="btn btn-primary " type="button" >
-                            <a href="/novellecar" class="text-light">novelle voiture</a>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-               
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <main class="text-center container mt-4">
-        <h1 class="text-primary">Liste des voitures</h1>
-    </main>
-    <div id="cars" class="container d-flex flex-wrap justify-content-center">
-
+            <ul class="dropdown-menu bg-primary">
+              <li><a class="dropdown-item" href="/car1?id=1">type1</a></li>
+              <li><a class="dropdown-item" href="/car1?id=2">type 2</a></li>
+              <li><a class="dropdown-item" href="/car1?id=3">type 3</a></li>
+            </ul>
+          </li>
+          <li><button class="btn btn-primary"><a href="/novellecar" class="text-light">novelle voiture</a></button></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
     </div>
-    <style>
-          .card {
-            width: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
+  </nav>
 
-        .card:hover {
-            transform: scale(1.05); 
-            box-shadow: 0px 0px 15px rgba(0, 0, 255, 0.7);
-        }
+  <!-- MAIN CONTENT -->
+  <main class="text-center container mt-4">
+    <h1 class="text-primary">Liste des voitures</h1>
+  </main>
+  <div id="cars" class="container d-flex flex-wrap justify-content-center"></div>
 
-        .card-img-top {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-body {
-            background: linear-gradient(135deg, rgba(0, 0, 255, 0.7), rgba(53, 53, 80, 0.432));
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .dropdown-item{
-            color: white;
-        }
-        .dropdown-item:hover{
-        
-            color:black;
-        }
-        a{
-            text-decoration: none;
-        }
-    
-    </style>
-    <script>
-        // pour affich tous les cars
-        function fetchcars(){
-            fetch("http://localhost:8888/cars")
-            .then(res=>res.json())
-            .then(cars => {
-                const container =document.getElementById("cars")
-                container.innerHTML=""
-                cars.forEach(car => {
-                       const cardiv = document.createElement("div")
-                cardiv.className = "card col-md-4 m-3 shadow-lg"
-                cardiv.innerHTML=`
-                 <img src="${car.image}" alt="${car.marque}" class="card-img-top">
+ <script>
+  fetch('/cars')
+    .then(res => res.json())
+    .then(cars => {
+      const carsContainer = document.getElementById("cars");
+      carsContainer.innerHTML = cars.map(car => `
+        <div class="card m-3 car-card" data-id="${car.id}">
+          <img src="/images/${car.image}" class="card-img-top" alt="voiture">
           <div class="card-body">
-              <h2 class="text-warning">${car.marque}</h2>
-              <h3>numero: ${car.num}</h3>
-              <h3>serie: ${car.serie}</h3>
-              <button class="btn btn-outline-light mt-2">Voir plus</button>
+            <h5 class="card-title text-warning">${car.marque} </h5>
+            <p class="card-text">Num: ${car.num}</p>
+            <p class="card-text">Série: ${car.serie}</p>
+            <button class="btn btn-outline-light mt-2">Voir plus</button>
           </div>
-                `
-            cardiv.addEventListener("click",()=>{
-                window.location.href=`/car1?id=${car.id}`
-            })
-            container.appendChild(cardiv)
-                    
-                });
+        </div>
+      `).join('');
 
-
-             
-            })
-            .catch(error=>{
-                 console.error('Erreur de fetch API:', error);
-                  `<p class="text-danger">Une erreur s'est produite lors du chargement des formations.</p>`;
-            })
+      // Event delegation
+      carsContainer.addEventListener("click", function(e) {
+        const card = e.target.closest(".car-card");
+        if (card) {
+          const carId = card.getAttribute("data-id");
+          window.location.href = `/car1?id=${carId}`;
         }
-        fetchcars();
+      });
+    });
+</script>
 
-
-
-
-//          document.addEventListener("DOMContentLoaded", async () => {
-//     const container = document.getElementById("cars");
-
-//     try {
-//         const response = await fetch("http://localhost:3000/novellecar");
-//         if (!response.ok) throw new Error("Erreur de récupération des cars");
-
-//         const cars = await response.json();
-
-//         cars.forEach(car => {
-//             const card = document.createElement("div");
-//             card.className = "card m-3";
-//             card.innerHTML = `
-//                 <img src="${car.image}" class="card-img-top" alt="${car.marque}">
-//                 <div class="card-body">
-//                     <h5 class="card-title">${car.marque}</h5>
-//                     <p class="card-text">nemero de voitur : ${car.num}</p>
-//                     <p class="card-text">serie de voitur : ${car.serie}</p>
-                  
-//                 </div>
-//             `;
-//             container.appendChild(card);
-//         });
-//     } catch (error) {
-//         console.error("Erreur:", error);
-//         container.innerHTML = `<p class="text-danger">Impossible de charger les vpiture</p>`;
-//     }
-// });
-
-
-        
-
-    </script>
+  <style>
+    .card {
+      width: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 15px rgba(0, 0, 255, 0.7);
+    }
+    .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      background: linear-gradient(135deg, rgba(0, 0, 255, 0.7), rgba(53, 53, 80, 0.432));
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .dropdown-item { color: white; }
+    .dropdown-item:hover { color: black; }
+    a { text-decoration: none; }
+  </style>
 </body>
 </html>

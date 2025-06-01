@@ -1,135 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nouvelle voiture</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projet de voiture</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">voitures</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/">Accueil</a>
-                    </li>
-                    
-                    
-                    <li class="nav-item dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          type de   voitures
-                        </button>
-                        <ul class="dropdown-menu bg-primary">
-                            <li><a class="dropdown-item te" href="/car1?id=1">type1</a></li>
-                            <li><a class="dropdown-item text-" href="/car1?id=2">type 2</a></li>
-                            <li><a class="dropdown-item text-" href="/car1?id=3">type 3</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button class="btn btn-primary " type="button" >
-                            <a href="/novellecar" class="text-light">novelle voiture</a>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-               
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <main class="text-center container mt-4">
-        <h1 class="text-primary">Liste des voitures</h1>
-    </main>
-    <div id="cars" class="container d-flex flex-wrap justify-content-center">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">voitures</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/novellecar">Nouvelle voiture</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
     </div>
-    <style>
+  </nav>
 
-        .dropdown-item{
-            color: white;
-        }
-        .dropdown-item:hover{
-        
-            color:black;
-        }
-        a{
-            text-decoration: none;
-        }
-    
-    </style>
-        <div class="container mt-5">
-        
-        <form id="form">
-            <div class="form-group mb-3">
-                <label for="marquecar" class="form-label">marque de voiture</label>
-                <input type="text" class="form-control" id="marquecar" placeholder="Entrez la marque">
-            </div>
-            <div class="mb-3">
-                <label for="serie" class="form-label">serie</label>
-                <input type="number" class="form-control" id="serie" placeholder="serie">
-            </div>
-            <!-- <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" rows="3" placeholder="Entrez la description"></textarea>
-            </div> -->
-            <div class="mb-3">
-                <label for="num" class="form-label">numero de la voiture</label>
-                <input type="text" class="form-control" id="num" placeholder="nemero se la voiture">
-            </div>
-            <div class="mb-3">
-    <label for="imagecar" class="form-label">Image de la voiture</label>
-    <input type="file" class="form-control" id="imagecar" accept="image/*">
-</div>
+  <!-- FORM -->
+  <main class="container mt-5">
+    <h2 class="text-center text-primary mb-4">Ajouter une nouvelle voiture</h2>
+    <form id="carForm" enctype="multipart/form-data" method="POST" action="/cars" class="mx-auto" style="max-width: 500px;">
+      <div class="mb-3">
+        <label class="form-label">Num:</label>
+        <input type="text" name="num" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Marque:</label>
+        <input type="text" name="marque" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Série:</label>
+        <input type="text" name="serie" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Image:</label>
+        <input type="file" name="imag" class="form-control" accept="image/*" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+    </form>
+  </main>
 
-            <button type="submit" class="btn btn-primary">Ajouter</button>
-        </form>
-    </div>
+  <script>
+    document.getElementById('carForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('/cars', {
+        method: 'POST',
+        body: formData
+      }).then(res => {
+        if (res.ok) {
+          alert("Voiture ajoutée !");
+          window.location.href = '/';
+        } else {
+          res.json().then(data => alert(data.error || "Erreur."));
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-<script>
-    const form = document.getElementById("from")
-    document.addEventListener("submit",(e)=>{
-        e.preventDefault()
-    const nouvellevoitur ={
-        marque: document.getElementById("marquecar").value,
-        num :document.getElementById("num").value,
-        serie:document.getElementById('serie').value,
-         Image: document.getElementById("imagecar").value,
-    }
-    fetch("http://localhost:3000/novelleformation",
-        {
-            method:"POST",
-            headers :{"content-Type":"application/json"},
-            body:JSON.stringify(nouvellevoitur)
-        }
-    ).then(res=>res.json())
-.then(car=>{
-    console.log("formation ajoutez",car);
-    
-    
-})
-.catch(err=>{
-    console.error("error",err);
-    
-})
-    })
-
-
-</script>
